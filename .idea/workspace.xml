@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12b7e7c4-feb5-4667-8c68-95646afa1b7f" name="Changes" comment="developing...">
+    <list default="true" id="12b7e7c4-feb5-4667-8c68-95646afa1b7f" name="Changes" comment="get and delete works. Trying to fix others methods...">
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/derezhenko/net/HttpClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/derezhenko/net/HttpClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/derezhenko/net/NetSample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/derezhenko/net/NetSample.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1693912111159</updated>
       <workItem from="1693912113794" duration="3628000" />
-      <workItem from="1694011344123" duration="11454000" />
+      <workItem from="1694011344123" duration="15574000" />
     </task>
     <task id="LOCAL-00001" summary="developing...">
       <created>1694011810740</created>
@@ -68,7 +67,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694011810740</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="get and delete works. Trying to fix others methods...">
+      <created>1694029021974</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1694029021974</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -87,6 +93,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="developing..." />
-    <option name="LAST_COMMIT_MESSAGE" value="developing..." />
+    <MESSAGE value="get and delete works. Trying to fix others methods..." />
+    <option name="LAST_COMMIT_MESSAGE" value="get and delete works. Trying to fix others methods..." />
   </component>
 </project>

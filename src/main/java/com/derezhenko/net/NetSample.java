@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -57,10 +56,14 @@ public class NetSample implements HttpClient{
 
             postConnection.setDoOutput(true);
 
-            String jsonInput = "{" + params.keySet().toArray()[0]+ ":" + params.values().toArray()[0] + "," + params
-                    .keySet().toArray()[1] + ":" + params.values().toArray()[1] + "," + params
-                    .keySet().toArray()[2] + ":" + params.values().toArray()[2] + "," + params
-                    .keySet().toArray()[3] + ":" + params.values().toArray()[3]+ "}";
+            //вот так работает
+            String jsonInput = "{\"name\":\"Tesdfgfgfgdhfhfhfgfgfhftg Test\",\"email\":\"gfgfgfffffhfhfhfdgfh  ffffg@gfh.ru\",\"gender\":\"female\",\"status\":\"active\"}";
+
+            //а так нет :(((((((((((((((((((((((((
+//            String jsonInput = "{\"" +params.keySet().toArray()[0]+ "\":\"" + params.values().toArray()[0] + "\",\"" + params
+//                    .keySet().toArray()[1] + "\":\"" + params.values().toArray()[1] + "\"," + params
+//                    .keySet().toArray()[2] + "\":\"" + params.values().toArray()[2] + "\"," + params
+//                    .keySet().toArray()[3] + "\":\"" + params.values().toArray()[3] + "\"}";
 
             try (OutputStream os = postConnection.getOutputStream()) {
                 byte [] input = jsonInput.getBytes(StandardCharsets.UTF_8);
@@ -89,27 +92,29 @@ public class NetSample implements HttpClient{
         StringBuilder stringBuilder = new StringBuilder();
         try{
             URL urlStr = new URL(url);
-            HttpURLConnection postConnection = (HttpURLConnection) urlStr.openConnection();
+            HttpURLConnection putConnection = (HttpURLConnection) urlStr.openConnection();
 
-            postConnection.setRequestMethod("PUT");
-            postConnection.setRequestProperty("Content-Type", "application/json");
-            postConnection.setRequestProperty("Accept", "application/json");
-            postConnection.setRequestProperty("Authorization", "Bearer c93c5b88dfc23701e7a623b35df72b9b97ae8c78df6472fb0f0adcb32e663774");
+            putConnection.setRequestMethod("PUT");
+            putConnection.setRequestProperty("Content-Type", "application/json");
+            putConnection.setRequestProperty("Accept", "application/json");
+            putConnection.setRequestProperty("Authorization", "Bearer c93c5b88dfc23701e7a623b35df72b9b97ae8c78df6472fb0f0adcb32e663774");
 
-            postConnection.setDoOutput(true);
+            putConnection.setDoOutput(true);
 
-            String jsonInput = "{" + params.keySet().toArray()[0]+ ":" + params.values().toArray()[0] + "," + params
-                    .keySet().toArray()[1] + ":" + params.values().toArray()[1] + "," + params
-                    .keySet().toArray()[3] + ":" + params.values().toArray()[3]+ "}";
+            String jsonInput = "{\"name\":\"T Test\",\"email\":\"fffg@gfh.ru\",\"status\":\"active\"}";
 
-            try (OutputStream os = postConnection.getOutputStream()) {
+//            String jsonInput = "{" + params.keySet().toArray()[0]+ ":" + params.values().toArray()[0] + "," + params
+//                    .keySet().toArray()[1] + ":" + params.values().toArray()[1] + "," + params
+//                    .keySet().toArray()[3] + ":" + params.values().toArray()[3]+ "}";
+
+            try (OutputStream os = putConnection.getOutputStream()) {
                 byte [] input = jsonInput.getBytes(StandardCharsets.UTF_8);
                 os.write(input, 0, input.length);
             }
 
-            System.out.println(postConnection.getResponseCode());
+            System.out.println(putConnection.getResponseCode());
 
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(postConnection.getInputStream()))){
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(putConnection.getInputStream()))){
                 String inp;
                 while ((inp = br.readLine()) != null) {
                     stringBuilder.append(inp);
@@ -129,16 +134,16 @@ public class NetSample implements HttpClient{
         StringBuilder stringBuilder = new StringBuilder();
         try{
             URL urlStr = new URL(url);
-            HttpURLConnection postConnection = (HttpURLConnection) urlStr.openConnection();
+            HttpURLConnection deleteConnection = (HttpURLConnection) urlStr.openConnection();
 
-            postConnection.setRequestMethod("DELETE");
-            postConnection.setRequestProperty("Content-Type", "application/json");
-            postConnection.setRequestProperty("Accept", "application/json");
-            postConnection.setRequestProperty("Authorization", "Bearer c93c5b88dfc23701e7a623b35df72b9b97ae8c78df6472fb0f0adcb32e663774");
+            deleteConnection.setRequestMethod("DELETE");
+            deleteConnection.setRequestProperty("Content-Type", "application/json");
+            deleteConnection.setRequestProperty("Accept", "application/json");
+            deleteConnection.setRequestProperty("Authorization", "Bearer c93c5b88dfc23701e7a623b35df72b9b97ae8c78df6472fb0f0adcb32e663774");
 
-            postConnection.setDoOutput(true);
+            deleteConnection.setDoOutput(true);
 
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(postConnection.getInputStream()))){
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(deleteConnection.getInputStream()))){
                 String inp;
                 while ((inp = br.readLine()) != null) {
                     stringBuilder.append(inp);
@@ -165,20 +170,23 @@ public class NetSample implements HttpClient{
 
         //post
         HashMap<String, String> newUser = new HashMap<>();
-        newUser.put("name", "Azaza Zaza");
-        newUser.put("email", "az@jfh.rtr");
+        newUser.put("name", "Azazfdfddffda Zaza");
+        newUser.put("email", "afdfdz@jfhdf.rtr");
         newUser.put("gender", "male");
         newUser.put("status", "active");
         System.out.println(ns.post("https://gorest.co.in/public/v2/users", newUser));
 
         //put
 //        HashMap<String, String> infoToChangeMap = new HashMap<>();
-//        infoToChangeMap.put("Tej Kapoor", "abcddhdh@nfjg.gh");
-//        System.out.println(ns.put("https://gorest.co.in/public/v2/users/2939", infoToChangeMap));
+//        infoToChangeMap.put("name", "azza zaz");
+//        infoToChangeMap.put("email", "azzazaz@hdjdh.th");
+//        infoToChangeMap.put("gender", "male");
+//        infoToChangeMap.put("status", "active");
+//        System.out.println(ns.put("https://gorest.co.in/public/v2/users/5104342", infoToChangeMap));
 
         //delete
-        System.out.println(ns.delete("https://gorest.co.in/public/v2/users/5120549", pagesMap));
-        System.out.println(ns.get("https://gorest.co.in/public/v2/users", pagesMap));
+//        System.out.println(ns.delete("https://gorest.co.in/public/v2/users/5120549", pagesMap));
+//        System.out.println(ns.get("https://gorest.co.in/public/v2/users", pagesMap));
 
 
 
@@ -218,7 +226,7 @@ public class NetSample implements HttpClient{
 //
 //            postConnection.setDoOutput(true);
 //
-//            String jsonInput = "{\"name\":\"Testg Test\",\"email\":\"gfgfgg@gfh.ru\",\"gender\":\"female\",\"status\":\"active\"}";
+//            String jsonInput = "{\"name\":\"Testggfggfggff Test\",\"email\":\"gfgffgfggg@gfh.ru\",\"gender\":\"female\",\"status\":\"active\"}";
 //
 //            try (OutputStream os = postConnection.getOutputStream()) {
 //                byte [] input = jsonInput.getBytes(StandardCharsets.UTF_8);
