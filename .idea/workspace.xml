@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12b7e7c4-feb5-4667-8c68-95646afa1b7f" name="Changes" comment="get and delete works. Trying to fix others methods...">
+    <list default="true" id="12b7e7c4-feb5-4667-8c68-95646afa1b7f" name="Changes" comment="sorry for hardcode and musor.&#10;Methods POST and PUT don't work correctly(">
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/derezhenko/net/NetSample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/derezhenko/net/NetSample.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1693912111159</updated>
       <workItem from="1693912113794" duration="3628000" />
-      <workItem from="1694011344123" duration="15574000" />
+      <workItem from="1694011344123" duration="15732000" />
     </task>
     <task id="LOCAL-00001" summary="developing...">
       <created>1694011810740</created>
@@ -74,7 +72,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694029021974</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="sorry for hardcode and musor.&#10;Methods POST and PUT don't work correctly(">
+      <created>1694033915782</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694033915782</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -94,6 +99,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="developing..." />
     <MESSAGE value="get and delete works. Trying to fix others methods..." />
-    <option name="LAST_COMMIT_MESSAGE" value="get and delete works. Trying to fix others methods..." />
+    <MESSAGE value="sorry for hardcode and musor.&#10;Methods POST and PUT don't work correctly(" />
+    <option name="LAST_COMMIT_MESSAGE" value="sorry for hardcode and musor.&#10;Methods POST and PUT don't work correctly(" />
   </component>
 </project>
