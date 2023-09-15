@@ -1,4 +1,4 @@
-package com.derezhenko.net;
+package com.derezhenko.net.client;
 
 import java.util.Map;
 
