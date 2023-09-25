@@ -43,5 +43,12 @@
     cookie username = <%=cookieUser%>
 </h3>
 
+    <form action="/weather" method="post">
+        City:
+        <input type="text" name="city"/>
+        <br>
+        <input type="submit" value="Get Weather">
+    </form>
+
 </body>
 </html>
