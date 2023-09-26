@@ -1,5 +1,8 @@
 package com.derezhenko.net.server;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -10,6 +13,7 @@ public class LoginServlet extends HttpServlet {
 
     public static final String  LOGIN = "login";
     public static final String PASSWORD = "qwerty123";
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,9 +23,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
+        req.setAttribute("login", login);
         String password = req.getParameter("password");
         if (LOGIN.equalsIgnoreCase(login) && PASSWORD.equals(password)) {
+
             //session
+            LOGGER.info("User with login {} logged in", login);
             HttpSession httpSession = req.getSession();
             httpSession.setAttribute("username", login);
             httpSession.setMaxInactiveInterval(60 * 60);

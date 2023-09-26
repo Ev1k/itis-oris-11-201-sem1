@@ -7,7 +7,7 @@
 <#--    <#if users?has_content></#if>-->
     <#if users??>
         <#list users as u>
-            ${u}
+            ${u.firstname} ${u.lastname}
             <br>
         </#list>
     </#if>
