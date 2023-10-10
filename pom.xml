@@ -46,6 +46,30 @@
             <version>${slf4j.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-core</artifactId>
+            <version>${clodinary.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>${clodinary.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -63,6 +87,7 @@
         <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <slf4j.version>2.0.9</slf4j.version>
+        <clodinary.version>1.34.0</clodinary.version>
     </properties>
 
 </project>

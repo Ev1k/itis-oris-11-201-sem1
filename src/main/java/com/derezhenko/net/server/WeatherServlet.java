@@ -18,7 +18,7 @@ import java.util.Map;
 
 @WebServlet(name = "weather", urlPatterns = "/weather")
 public class WeatherServlet extends HttpServlet {
-    private List<InfoDto> info = null;
+//    private List<InfoDto> info = null;
     private static final Logger LOGGER = LoggerFactory.getLogger(WeatherServlet.class);
 
     @Override
@@ -27,7 +27,8 @@ public class WeatherServlet extends HttpServlet {
         NetSample ns = new NetSample();
         Map<String, String> map = new HashMap();
         map.put("q", city);
-        map.put("appid", "c6854b4eccb370e41dfaf2ebdb3e3bcb");
+//        map.put("appid", "c6854b4eccb370e41dfaf2ebdb3e3bcb");
+        map.put("appid", "8d8d37ffe8dd312b5c5295632bf4ad67");
 
         long start = System.currentTimeMillis();
         req.setAttribute("startTime", start);
@@ -40,25 +41,25 @@ public class WeatherServlet extends HttpServlet {
         String humidity = js.getJSONObject("main").getString("humidity");
         String description = js.getJSONArray("weather").getJSONObject(0).getString("main");
 
-        info.add(new InfoDto(city, temperature, humidity, description));
-        LOGGER.info("user: " + req.getParameter("login"));
-        System.out.println(description);
-        System.out.println(humidity);
-        System.out.println(temperature);
-//        Cookie cookie1 = new Cookie("temperature", temperature);
-//        Cookie cookie2 = new Cookie("humidity", humidity);
-//        Cookie cookie3 = new Cookie("description", description);
-//        Cookie cookie4 = new Cookie("city", city);
-//        resp.addCookie(cookie1);
-//        resp.addCookie(cookie2);
-//        resp.addCookie(cookie3);
-//        resp.addCookie(cookie4);
+//        info.add(new InfoDto(city, temperature, humidity, description));
+//        LOGGER.info("user: " + req.getParameter("login"));
+//        System.out.println(description);
+//        System.out.println(humidity);
+//        System.out.println(temperature);
+        Cookie cookie1 = new Cookie("temperature", temperature);
+        Cookie cookie2 = new Cookie("humidity", humidity);
+        Cookie cookie3 = new Cookie("description", description);
+        Cookie cookie4 = new Cookie("city", city);
+        resp.addCookie(cookie1);
+        resp.addCookie(cookie2);
+        resp.addCookie(cookie3);
+        resp.addCookie(cookie4);
 
         resp.sendRedirect("weather.jsp");
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("info", info);
-//        req.getRequestDispatcher("weather.jsp").forward(req, resp);
+//        req.setAttribute("info", info);
+        req.getRequestDispatcher("weather.jsp").forward(req, resp);
     }
 }

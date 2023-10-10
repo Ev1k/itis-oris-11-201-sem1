@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Objects" %><%--
   Created by IntelliJ IDEA.
   User: Эвелина
   Date: 19.09.2023
@@ -9,6 +9,17 @@
 <html>
 <head>
     <title>Main page</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/jquery@3.6/dist/jquery.min.js" rel="stylesheet">
+    <script>
+        $(document).on("click", "#ajax-button", function () {
+            console.log("Debug");
+            // alert("alert test");
+            $.get("/ajax/hello", function (response){
+                $("#ajax-response").text(response);
+            })
+        })
+    </script>
 </head>
 <body>
     <%
@@ -33,22 +44,63 @@
         } else {
             sessionId = session.getId();
         }
+
+
+        Double temperature = 0.0;
+        String humidity = null;
+        String description = null;
+        String city = null;
+
+//    List<InfoDto> info = null;
+//    info = (List<InfoDto>) request.getAttribute("info");
+//    if (info != null) {
+//        city = info.get(0).getCity();
+//        humidity = info.get(0).getHumidity();
+//        temperature = Double.parseDouble(info.get(0).getTemperature()) - 273;
+//        description = info.get(0).getDescription();
+//    }
+
+        Cookie[] cookies1 = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies1) {
+                System.out.println("Cockie: "+cookie.getName());
+                if (Objects.equals(cookie.getName(), "temperature")) {
+                    temperature = ((Double.parseDouble(cookie.getValue())) - 273);
+                }
+                if (Objects.equals(cookie.getName(), "humidity")) {
+                    humidity = cookie.getValue();
+                }
+                if (Objects.equals(cookie.getName(), "description")) {
+                    description = cookie.getValue();
+                }
+                if (Objects.equals(cookie.getName(), "city")) {
+                    city = cookie.getValue();
+                }
+            }
+        } else {
+            String strErr = "error";
+        }
     %>
 
 <h3>
-    Hello, <%=user%>! Login successfull
+    Hello, <%=user%>! Login successfully
     <br>
     Session ID = <%=sessionId%>
     <br>
     cookie username = <%=cookieUser%>
 </h3>
-
-    <form action="/weather" method="post">
+    <form action="/weather.jsp" method="post">
         City:
         <input type="text" name="city"/>
-        <br>
-        <input type="submit" value="Get Weather">
+<%--        <br>--%>
+<%--        <input type="submit" value="Get Weather">--%>
     </form>
+    <div id="ajax-response"></div>
+    <form>
+        <input type="button" id="ajax-button" value="Get weather">
+    </form>
+    <br>
+
 
 </body>
 </html>

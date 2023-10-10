@@ -18,35 +18,35 @@
     String description = null;
     String city = null;
 
-    List<InfoDto> info = null;
-    info = (List<InfoDto>) request.getAttribute("info");
-    if (info != null) {
-        city = info.get(0).getCity();
-        humidity = info.get(0).getHumidity();
-        temperature = Double.parseDouble(info.get(0).getTemperature()) - 273;
-        description = info.get(0).getDescription();
-    }
-//
-//    Cookie[] cookies = request.getCookies();
-//    if (cookies != null) {
-//        for (Cookie cookie : cookies) {
-//            System.out.println("Cockie: "+cookie.getName());
-//            if (Objects.equals(cookie.getName(), "temperature")) {
-//                temperature = ((Double.parseDouble(cookie.getValue())) - 273);
-//            }
-//            if (Objects.equals(cookie.getName(), "humidity")) {
-//                humidity = cookie.getValue();
-//            }
-//            if (Objects.equals(cookie.getName(), "description")) {
-//                description = cookie.getValue();
-//            }
-//            if (Objects.equals(cookie.getName(), "city")) {
-//                city = cookie.getValue();
-//            }
-//        }
-//    } else {
-//        String strErr = "error";
+//    List<InfoDto> info = null;
+//    info = (List<InfoDto>) request.getAttribute("info");
+//    if (info != null) {
+//        city = info.get(0).getCity();
+//        humidity = info.get(0).getHumidity();
+//        temperature = Double.parseDouble(info.get(0).getTemperature()) - 273;
+//        description = info.get(0).getDescription();
 //    }
+
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            System.out.println("Cockie: "+cookie.getName());
+            if (Objects.equals(cookie.getName(), "temperature")) {
+                temperature = ((Double.parseDouble(cookie.getValue())) - 273);
+            }
+            if (Objects.equals(cookie.getName(), "humidity")) {
+                humidity = cookie.getValue();
+            }
+            if (Objects.equals(cookie.getName(), "description")) {
+                description = cookie.getValue();
+            }
+            if (Objects.equals(cookie.getName(), "city")) {
+                city = cookie.getValue();
+            }
+        }
+    } else {
+        String strErr = "error";
+    }
 %>
 
 <h3>
