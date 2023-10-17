@@ -2,11 +2,11 @@ package com.derezhenko.net.dto;
 
 public class InfoDto {
     private String city;
-    private String temperature;
+    private Double temperature;
     private String humidity;
     private String description;
 
-    public InfoDto(String city, String temperature, String humidity, String description) {
+    public InfoDto(String city, Double temperature, String humidity, String description) {
         this.city = city;
         this.temperature = temperature;
         this.humidity = humidity;
@@ -17,7 +17,7 @@ public class InfoDto {
         return city;
     }
 
-    public String getTemperature() {
+    public Double getTemperature() {
         return temperature;
     }
 

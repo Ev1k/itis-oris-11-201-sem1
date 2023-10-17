@@ -1,4 +1,6 @@
-<%@ page import="java.util.Objects" %><%--
+<%@ page import="java.util.Objects" %>
+<%@ page import="com.derezhenko.net.dto.InfoDto" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Эвелина
   Date: 19.09.2023
@@ -14,8 +16,9 @@
     <script>
         $(document).on("click", "#ajax-button", function () {
             console.log("Debug");
-            // alert("alert test");
-            $.get("/ajax/hello", function (response){
+            city = $("#city-parameter").val();
+            console.log(city);
+            $.get("/ajax/hello?city="+city, function (response){
                 $("#ajax-response").text(response);
             })
         })
@@ -51,35 +54,35 @@
         String description = null;
         String city = null;
 
-//    List<InfoDto> info = null;
-//    info = (List<InfoDto>) request.getAttribute("info");
-//    if (info != null) {
-//        city = info.get(0).getCity();
-//        humidity = info.get(0).getHumidity();
-//        temperature = Double.parseDouble(info.get(0).getTemperature()) - 273;
-//        description = info.get(0).getDescription();
-//    }
+    List<InfoDto> info = null;
+    info = (List<InfoDto>) request.getAttribute("info");
+    if (info != null) {
+        city = info.get(0).getCity();
+        humidity = info.get(0).getHumidity();
+        temperature = info.get(0).getTemperature() - 273;
+        description = info.get(0).getDescription();
+    }
 
-        Cookie[] cookies1 = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies1) {
-                System.out.println("Cockie: "+cookie.getName());
-                if (Objects.equals(cookie.getName(), "temperature")) {
-                    temperature = ((Double.parseDouble(cookie.getValue())) - 273);
-                }
-                if (Objects.equals(cookie.getName(), "humidity")) {
-                    humidity = cookie.getValue();
-                }
-                if (Objects.equals(cookie.getName(), "description")) {
-                    description = cookie.getValue();
-                }
-                if (Objects.equals(cookie.getName(), "city")) {
-                    city = cookie.getValue();
-                }
-            }
-        } else {
-            String strErr = "error";
-        }
+//        Cookie[] cookies1 = request.getCookies();
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies1) {
+//                System.out.println("Cockie: "+cookie.getName());
+//                if (Objects.equals(cookie.getName(), "temperature")) {
+//                    temperature = ((Double.parseDouble(cookie.getValue())) - 273);
+//                }
+//                if (Objects.equals(cookie.getName(), "humidity")) {
+//                    humidity = cookie.getValue();
+//                }
+//                if (Objects.equals(cookie.getName(), "description")) {
+//                    description = cookie.getValue();
+//                }
+//                if (Objects.equals(cookie.getName(), "city")) {
+//                    city = cookie.getValue();
+//                }
+//            }
+//        } else {
+//            String strErr = "error";
+//        }
     %>
 
 <h3>
@@ -91,7 +94,7 @@
 </h3>
     <form action="/weather.jsp" method="post">
         City:
-        <input type="text" name="city"/>
+        <input id="city-parameter" type="text" name="city"/>
 <%--        <br>--%>
 <%--        <input type="submit" value="Get Weather">--%>
     </form>

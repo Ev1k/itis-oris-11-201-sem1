@@ -17,11 +17,15 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
-@WebServlet(urlPatterns = "/upload")
-@MultipartConfig(
-        maxFileSize = 5 * 1024,
-        maxRequestSize = 10 * 1024 * 1024
+
+
+
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, //Порог размера, после которого файл будет записан на диск
+        maxFileSize = 1024 * 1024 * 5,
+        maxRequestSize = 1024 * 1024 * 5 * 5, //Максимальный размер, разрешенный для multipart/form-data Запросы
+        location = "/test-upload" // Загружает вот сюда
 )
+@WebServlet(urlPatterns = "/upload")
 public class FileUploadingServlet extends HttpServlet {
 
     private final Cloudinary cloudinary = CloudinaryUtil.getInstance();
@@ -29,11 +33,14 @@ public class FileUploadingServlet extends HttpServlet {
     public static final int DIRECTIONS_COUNT = 100;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Part part = req.getPart("file");
+        System.out.println("Upload - doPost");
+        Part part = req.getPart("upload-file");
+        System.out.println("after part");
 
         String filename = Paths.get(part.getSubmittedFileName()).toString();
 
         File file = new File(FILE_PATH_PREFIX + File.separator + filename.hashCode() % DIRECTIONS_COUNT + File.separator + filename);
+
         InputStream content = part.getInputStream();
         file.getParentFile().mkdirs();
         file.createNewFile();

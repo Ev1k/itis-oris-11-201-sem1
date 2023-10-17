@@ -1,18 +1,14 @@
 <html lang="en">
-<#include "upload.ftl">
+<#include "base.ftl">
 
-<#macro title>
-    exception details
-</#macro>
+<#macro title>Upload file</#macro>
 
-<#macro contect>
-    <p>Upload files</p>
-    <form action="upload" method="post">
-        <input type="file" name="file">
+<#macro content>
+    <p>Upload file:</p>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="upload-file">
         <br>
         <input type="submit" value="upload">
     </form>
-
 </#macro>
-
 </html>
