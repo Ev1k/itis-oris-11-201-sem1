@@ -12,25 +12,26 @@
 <html>
 <head>
     <title>Masters</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
 <div align="center">
-    <h2>Choise the master</h2>
-    <form action="list" method="post">
-        Select the master:&nbsp;
-        <select name="master">
-            <c:forEach items="${listMaster}" var="master">
-                <option value="${master.name}"
-<%--                        <c:if test="${master.id eq selectedMasterId}">selected="selected"</c:if>--%>
-                >
-                        ${master.name}
-                </option>
-            </c:forEach>
-        </select>
-        <br/><br/>
-        <input type="submit" value="Submit" />
-    </form>
+<h2>Выберите мастера:</h2>
+<select id="countries"></select>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '/masters',
+            method: 'GET',
+            success: function(data) {
+                $.each(data, function(id, master) {
+                    var option = $('<option>').val(id).text(master);
+                    $('#masters').append(option);
+                });
+            }
+        });
+    });
+</script>
 </div>
 </body>
 </html>
