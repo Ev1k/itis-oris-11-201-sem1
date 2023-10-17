@@ -1,6 +1,5 @@
 package com.derezhenko.net.server;
 
-import com.derezhenko.net.dao.Dao;
 import com.derezhenko.net.dao.MasterDAO;
 import com.derezhenko.net.model.Master;
 
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/list")

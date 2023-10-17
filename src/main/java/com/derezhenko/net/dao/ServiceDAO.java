@@ -1,31 +1,31 @@
 package com.derezhenko.net.dao;
 
-import com.derezhenko.net.model.Master;
+import com.derezhenko.net.model.Service;
 import com.derezhenko.net.util.DatabaseConnectionUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MasterDAO implements Dao<Master> {
+public class ServiceDAO implements Dao<Service> {
     private final Connection connection = DatabaseConnectionUtil.getConnection();
 
     @Override
-    public Master get(int id) {
+    public Service get(int id) {
         return null;
     }
 
     @Override
-    public List<Master> getAll() {
+    public List<Service> getAll() {
         try {
             Statement statement = connection.createStatement();
-            String sql = "SELECT * from masters";
+            String sql = "SELECT * from services";
             ResultSet resultSet = statement.executeQuery(sql);
-            List<Master> masters = new ArrayList<>();
+            List<Service> services = new ArrayList<>();
             if (resultSet != null) {
                 while (resultSet.next()) {
-                    masters.add(
-                            new Master(
+                    services.add(
+                            new Service(
                                     resultSet.getInt("id"),
                                     resultSet.getString("name")
                             )
@@ -33,18 +33,18 @@ public class MasterDAO implements Dao<Master> {
                     System.out.println();
                 }
             }
-            return masters;
+            return services;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public void save(Master master) {
-        String sql = "insert into masters (name) values (?);";
+    public void save(Service service) {
+        String sql = "insert into service (name) values (?);";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, "Алина");
+            preparedStatement.setString(1, "Nails");
             preparedStatement.executeUpdate();
             preparedStatement.execute();
         } catch (SQLException e) {
