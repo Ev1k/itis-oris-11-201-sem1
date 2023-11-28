@@ -1,5 +1,6 @@
 package com.example.chatbot;
 
+import com.example.chatbot.api.Currency;
 import com.example.chatbot.api.Weather;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -66,7 +67,7 @@ public class HelloApplication extends Application {
                         throw new RuntimeException(e);
                     }
                 } else if (message.equalsIgnoreCase("валюта")) {
-                    chatArea.appendText("Курс валют на сегодня: ...\n");
+                    chatArea.appendText("Курс валют на сегодня: "+ " eur: " + Currency.getEur() + " us: "+ Currency.getUs() + "...\n");
                 } else {
                     chatArea.appendText("Вы: " + message + "\n");
                 }
