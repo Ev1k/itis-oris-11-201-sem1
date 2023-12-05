@@ -57,17 +57,24 @@ public class HelloApplication extends Application {
             public void handle(ActionEvent event) {
                 String message = inputField.getText();
                 String command = inputField.getText().split(" ")[0];
-                String city = message.split(" ")[1];
                 if (message.equalsIgnoreCase("команда")) {
                     chatArea.appendText("Список команд:\n1. команда - показать список команд\n2. погода [город]- показать текущую погоду\n3. валюта - показать курс валют\n");
+
                 } else if (message.equalsIgnoreCase("погода")) {
                     try {
+                        String city = message.split(" ")[1];
                         chatArea.appendText("Погода сегодня:"+ Weather.getWeather(city) +" ...\n");
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 } else if (message.equalsIgnoreCase("валюта")) {
                     chatArea.appendText("Курс валют на сегодня: "+ " eur: " + Currency.getEur() + " us: "+ Currency.getUs() + "...\n");
+
+                } else if (message.equalsIgnoreCase("игра")) {
+                    Stage gameStage = new Stage();
+                    SnakeGame snakeGame = new SnakeGame();
+                    snakeGame.startGame(gameStage);
+                    gameStage.show();
                 } else {
                     chatArea.appendText("Вы: " + message + "\n");
                 }
