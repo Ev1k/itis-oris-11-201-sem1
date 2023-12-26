@@ -29,19 +29,24 @@ public class Initializer extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {//TODO^ убрать из назв эксепшн
         GameProcess gm = new GameProcess();
-        gm.start(new Stage());
         playersConnectionsStateMap = MainServerSocket.getPlayersConnectionsStateMap();
         socket = new Socket("localhost", 12345);
         clientSocket = new ClientSocket(socket);
 
         BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getClientInputStream(), StandardCharsets.UTF_8));
         while (true) {
-            UUID uuid = UUID.fromString(input.readLine());
-            System.out.println(uuid);
-            if (uuid != null) {
+            if (input.ready()) {
+                UUID uuid = UUID.fromString(input.readLine());
+                System.out.println(uuid);
+                //TODO: извлечь игрока по айди
+
+//            if (uuid != null) {
+//                break;
+//            }
                 break;
             }
         }
+//        gm.start(new Stage());
         Button startButton = new Button("Начать игру");
         startButton.setOnAction(event -> handleStartButton());
 
@@ -58,7 +63,7 @@ public class Initializer extends Application {
         try {
 //            Socket socket = new Socket("localhost", 12345);
 //            ClientSocket clientSocket = new ClientSocket(socket);
-//            Player player = clientSocket.getPlayer();
+            Player player = clientSocket.getPlayer();
             BufferedWriter output = new BufferedWriter(new OutputStreamWriter(clientSocket.getClientOutputStream(), StandardCharsets.UTF_8));
             output.write("вы подключились:" + clientSocket.getPlayer().getUuid());
             output.flush();

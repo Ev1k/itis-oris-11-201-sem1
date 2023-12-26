@@ -27,34 +27,28 @@ public class GameProcess {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        try {
-            Socket socket = new Socket("localhost", 12345);
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-//            myOwnPlayerId = in.readLine();
-            Rectangle myPlayer = new Rectangle(PLAYER_SIZE, PLAYER_SIZE);
-            myPlayer.setLayoutX(50);
-            myPlayer.setLayoutY(WINDOW_HEIGHT - GROUND_HEIGHT - PLAYER_SIZE);
+        Rectangle myPlayer = new Rectangle(PLAYER_SIZE, PLAYER_SIZE);
+        myPlayer.setLayoutX(50);
+        myPlayer.setLayoutY(WINDOW_HEIGHT - GROUND_HEIGHT - PLAYER_SIZE);
 //            playerMap.put(myOwnPlayerId, myPlayer);
-            root.getChildren().add(myPlayer);
+        root.getChildren().add(myPlayer);
 
-            scene.setOnKeyPressed(e -> {
-                switch (e.getCode()) {
-                    case LEFT:
-                        myPlayer.setLayoutX(myPlayer.getLayoutX() - 5);
-                        break;
-                    case RIGHT:
-                        myPlayer.setLayoutX(myPlayer.getLayoutX() + 5);
-                        break;
-                    case SPACE:
-                        jumpPlayer(myPlayer);
-                        break;
-                }
-                // Обновляем карту после перемещения
+        scene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case LEFT:
+                    myPlayer.setLayoutX(myPlayer.getLayoutX() - 5);
+                    break;
+                case RIGHT:
+                    myPlayer.setLayoutX(myPlayer.getLayoutX() + 5);
+                    break;
+                case SPACE:
+                    jumpPlayer(myPlayer);
+                    break;
+            }
+            // Обновляем карту после перемещения
 //                playerMap.put(myOwnPlayerId, myPlayer);
 //                out.println("update," + myOwnPlayerId + "," + myPlayer.getLayoutX() + "," + myPlayer.getLayoutY());
-            });
+        });
 
 //            new Thread(() -> {
 //                String response;
@@ -69,9 +63,6 @@ public class GameProcess {
 //                    e.printStackTrace();
 //                }
 //            }).start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 //    private void updatePlayerPosition(String playerId, double x, double y) {

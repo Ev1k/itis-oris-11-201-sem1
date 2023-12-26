@@ -46,13 +46,13 @@ public class MainServerSocket {
                 System.out.println("сокет есть");
                 playersConnectionsStateMap.put(player.getUuid(), clientSocket); // достать в иниц этот сокет по айди
 
-
                 BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getClientInputStream(), StandardCharsets.UTF_8));
                 BufferedWriter output = new BufferedWriter(new OutputStreamWriter(clientSocket.getClientOutputStream(), StandardCharsets.UTF_8));
-                output.write(player.getUuid().toString());
+                output.write(player.getUuid().toString() + "\r\n");
                 System.out.println(player.getUuid().toString());
                 clientSocket.setPlayer(player);
                 output.write("Игрок подключен:" + clientSocket.getPlayer().getUuid());
+                output.flush();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
