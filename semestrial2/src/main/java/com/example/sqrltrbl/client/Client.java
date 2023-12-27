@@ -10,4 +10,6 @@ public interface Client {
     void sendMessage(Message message) throws ClientException;
 
     Queue<Message> pendingMessages();
+
+    int getId();
 }

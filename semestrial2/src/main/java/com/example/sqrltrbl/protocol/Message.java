@@ -1,20 +1,26 @@
 package com.example.sqrltrbl.protocol;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.nio.ByteBuffer;
 
+@NoArgsConstructor
+@Getter
 public abstract class Message {
-    public static final int HEADER_SIZE = Character.BYTES * 2 + Integer.BYTES;
-    public static final String MAGIC = "ST";
+    protected static final int KIND_BYTES = Integer.BYTES;
 
-    public MessageKind getKind() {
-        return MessageKind.NONE;
+    protected MessageKind kind;
+
+    public Message(ByteBuffer buffer) throws MessageException {
+        this.kind = MessageKind.fromInt(buffer.getInt());
     }
 
     public abstract ByteBuffer encode();
 
     protected void encodeHeader(ByteBuffer buffer) {
-        buffer.putChar(MAGIC.charAt(0));
-        buffer.putChar(MAGIC.charAt(1));
         buffer.putInt(getKind().ordinal());
     }
+
+    public abstract int bytes();
 }

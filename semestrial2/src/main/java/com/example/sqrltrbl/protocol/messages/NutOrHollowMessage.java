@@ -1,26 +1,28 @@
 package com.example.sqrltrbl.protocol.messages;
 
-import lombok.Getter;
 import com.example.sqrltrbl.protocol.Message;
 import com.example.sqrltrbl.protocol.MessageException;
 import com.example.sqrltrbl.protocol.MessageKind;
+import lombok.Getter;
 
 import java.nio.ByteBuffer;
 
 @Getter
-public class AcceptMessage extends Message {
-    private static final int BYTES = KIND_BYTES + Integer.BYTES;
-
+public class NutOrHollowMessage extends Message {
+    private static final int BYTES = KIND_BYTES + Integer.BYTES * 2;
     private final int clientId;
+    private final int nutOtHollow;
 
-    public AcceptMessage(int clientId) {
-        this.kind = MessageKind.ACCEPT;
+    public NutOrHollowMessage(int clientId, int nutOtHollow) {
+        this.kind = MessageKind.NUT_OR_HOLLOW;
         this.clientId = clientId;
+        this.nutOtHollow = nutOtHollow;
     }
 
-    public AcceptMessage(ByteBuffer buffer) throws MessageException {
+    public NutOrHollowMessage(ByteBuffer buffer) throws MessageException {
         super(buffer);
         this.clientId = buffer.getInt();
+        this.nutOtHollow = buffer.getInt();
     }
 
     @Override
@@ -28,9 +30,11 @@ public class AcceptMessage extends Message {
         ByteBuffer buffer = ByteBuffer.allocate(BYTES);
         encodeHeader(buffer);
         buffer.putInt(clientId);
+        buffer.putInt(nutOtHollow);
         buffer.flip();
         return buffer;
     }
+
 
     @Override
     public int bytes() {
@@ -39,8 +43,9 @@ public class AcceptMessage extends Message {
 
     @Override
     public String toString() {
-        return "AcceptMessage{" +
+        return "NutOrHollowMessage{" +
                 "clientId=" + clientId +
+                " Nut/Hollow=" + nutOtHollow +
                 '}';
     }
 }
